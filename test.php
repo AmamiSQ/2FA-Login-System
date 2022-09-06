@@ -8,12 +8,8 @@
 </head>
 <body>
     <?php
-        $array = [1, 2, 3];
-        $sum = 0;
-        foreach($array as $variable){
-            $sum = $sum + $variable;
-        }
-        echo $sum;
+        echo "hello world!";
+        echo "test";
         
     ?>
 </body>
