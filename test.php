@@ -7,10 +7,20 @@
     <title>Testing</title>
 </head>
 <body>
+    <!-- start PHP code -->
     <?php
-        echo "hello world!";
-        echo "test";
+        function test(){
+            $tof = true;
+            if($tof){
+                echo "function works";
+            }
+            else{
+                echo "FAILURE";
+            }
+        }
+        test();
         
     ?>
+   <!-- end PHP code --> 
 </body>
 </html>
