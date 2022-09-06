@@ -19,6 +19,8 @@
             }
         }
         test();
+        echo "<br> <i> test </i>";
+        echo 3 % 10;
         
     ?>
    <!-- end PHP code --> 
