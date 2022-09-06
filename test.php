@@ -19,7 +19,7 @@
             }
         }
         test();
-        echo "<br> <i> test </i>";
+        echo "<br> <i> test </i> <br>";
         echo 3 % 10;
         
     ?>
