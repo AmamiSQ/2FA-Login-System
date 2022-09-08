@@ -19,7 +19,11 @@
     <!-- start PHP code -->
     <?php
        error_reporting(E_ERROR | E_PARSE); //don't print warnings to the screen
-       
+
+       function TFA(){
+        //placeholder
+       }
+
        function login(){
         $user = false;
         $pass = false;
@@ -42,11 +46,9 @@
                 default: 
                     echo "no such user";
                     break;
+                    
         }
        };
-       function TFA(){
-        //placeholder
-       }
 
        login();
     ?>
