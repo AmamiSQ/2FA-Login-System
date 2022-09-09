@@ -22,45 +22,14 @@
        use RobThree\Auth\TwoFactorAuth;
        error_reporting(E_ERROR | E_PARSE); //don't print warnings to the screen
        
+       $tfa = new TwoFactorAuth();
+       $secret = $tfa->createSecret();
+    ?>
 
-       function TFA(){
-        $tfa = new TwoFactorAuth();
-        $secret = $tfa->createSecret();
+    <img src="<?php echo $tfa->getQRCodeImageAsDataUri('Testing', $secret);?>"><br>
 
-        echo "<br>Please enter the following secret: $secret<br>";
-
-        $result = $tfa->verifyCode($secret, $_POST['verification']);
-        echo $result;
-
-       }
-
-       function login(){
-        $user = false;
-        $pass = false;
-
-        //check if given username and password are correct
-        if($_POST['name'] == "testU"){
-                $user = true;
-        }
-        if($_POST['pass'] == "testP"){
-                $pass = true;
-        }
-
-        switch([$user, $pass]){
-                case [true, true]:
-                    TFA();
-                    break;
-                case [true, false]:
-                    echo "password incorrect";
-                    break;
-                default: 
-                    echo "no such user";
-                    break;
-
-        }
-       };
-
-       login();
+    <?php
+        $code = $tfa->getCode($secret);
     ?>
    <!-- end PHP code --> 
 </body>
