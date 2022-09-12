@@ -18,6 +18,7 @@
 
     <!-- start PHP code -->
     <?php
+       require_once("vendor/autoload.php");
        use Jajo\JSONDB;
        error_reporting(E_ERROR | E_PARSE); //don't print warnings to the screen
 
