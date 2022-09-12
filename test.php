@@ -19,12 +19,17 @@
     <!-- start PHP code -->
     <?php
        require_once("vendor/autoload.php");
+       use RobThree\Auth\TwoFactorAuth;
        include 'connect.php'; //connect to db
        error_reporting(E_ERROR | E_PARSE); //don't print warnings to the screen
+
 
        function login(){
         $user = false;
         $pass = false;
+
+        $tfa = new TwoFactorAuth();
+        $secret = $tfa->createSecret();
 
         //check if given username and password are correct
         if($_POST['name'] == "testU"){
@@ -35,20 +40,21 @@
         }
 
         switch([$user, $pass]){
-                case [true, true]:
-                    echo "user logged in";
-                    break;
+                case [true, true]:?>
+                    <img src="<?php echo $tfa->getQRCodeImageAsDataUri('Testing', $secret);?>"><br>
+                    <?php break;
                 case [true, false]:
                     echo "password incorrect";
                     break;
                 default: 
                     echo "no such user";
                     break;
+                    
 
         }
        };
 
-       //login();
+       login();
 
        $sql = 'SELECT * FROM test_sql';
        $result = mysqli_query($conn, $sql);
