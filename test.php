@@ -19,16 +19,9 @@
     <!-- start PHP code -->
     <?php
        require_once("vendor/autoload.php");
-       use Jajo\JSONDB;
+       include 'connect.php'; //connect to db
        error_reporting(E_ERROR | E_PARSE); //don't print warnings to the screen
-       echo "wtf";
 
-       $json_db = new JSONDB(__DIR__);
-       echo "test1";
-       $json_db->insert( 'users.json', ['name' => 'Thomas', 'state' => 'Nigeria', 'age' => 22 ]);
-       echo "test";
-
-       
        function login(){
         $user = false;
         $pass = false;
@@ -56,6 +49,12 @@
        };
 
        //login();
+
+       $sql = 'SELECT * FROM test_sql';
+       $result = mysqli_query($conn, $sql);
+       //print_r(mysqli_fetch_all($result, MYSQLI_ASSOC));
+       mysqli_free_result($result);
+       mysqli_close($conn);
     ?>
    <!-- end PHP code --> 
 </body>
