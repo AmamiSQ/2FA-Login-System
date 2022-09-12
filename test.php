@@ -18,8 +18,12 @@
 
     <!-- start PHP code -->
     <?php
+       use Jajo\JSONDB;
        error_reporting(E_ERROR | E_PARSE); //don't print warnings to the screen
 
+       $json_db = new JSONDB(__DIR__);
+
+       
        function login(){
         $user = false;
         $pass = false;
