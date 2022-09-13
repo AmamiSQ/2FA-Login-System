@@ -4,19 +4,37 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcb840f4a001e23092135a211a91c73a1
+class ComposerStaticInita90d1863f2e628a3b26ce04cad8b6500
 {
+    public static $files = array (
+        'b1dd4e332496ee9d8933dc654076e9a5' => __DIR__ . '/..' . '/jajo/jsondb/helpers/dataTypes.php',
+        'ac0c476eaaca2c96072228f64c624fb0' => __DIR__ . '/..' . '/jajo/jsondb/helpers/json.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
-        'R' => 
+        'P' => 
         array (
-            'RobThree\\Auth\\' => 14,
+            'PragmaRX\\Google2FA\\' => 19,
+            'ParagonIE\\ConstantTime\\' => 23,
+        ),
+        'J' => 
+        array (
+            'Jajo\\' => 5,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'RobThree\\Auth\\' => 
+        'PragmaRX\\Google2FA\\' => 
         array (
-            0 => __DIR__ . '/..' . '/robthree/twofactorauth/lib',
+            0 => __DIR__ . '/..' . '/pragmarx/google2fa/src',
+        ),
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'Jajo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jajo/jsondb/src',
         ),
     );
 
@@ -27,9 +45,9 @@ class ComposerStaticInitcb840f4a001e23092135a211a91c73a1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcb840f4a001e23092135a211a91c73a1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcb840f4a001e23092135a211a91c73a1::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitcb840f4a001e23092135a211a91c73a1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita90d1863f2e628a3b26ce04cad8b6500::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita90d1863f2e628a3b26ce04cad8b6500::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita90d1863f2e628a3b26ce04cad8b6500::$classMap;
 
         }, null, ClassLoader::class);
     }
