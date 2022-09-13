@@ -6,20 +6,19 @@ namespace Composer\Autoload;
 
 class ComposerStaticInita90d1863f2e628a3b26ce04cad8b6500
 {
-    public static $files = array (
-        'b1dd4e332496ee9d8933dc654076e9a5' => __DIR__ . '/..' . '/jajo/jsondb/helpers/dataTypes.php',
-        'ac0c476eaaca2c96072228f64c624fb0' => __DIR__ . '/..' . '/jajo/jsondb/helpers/json.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
             'PragmaRX\\Google2FA\\' => 19,
             'ParagonIE\\ConstantTime\\' => 23,
         ),
-        'J' => 
+        'D' => 
         array (
-            'Jajo\\' => 5,
+            'DASPRiD\\Enum\\' => 13,
+        ),
+        'B' => 
+        array (
+            'BaconQrCode\\' => 12,
         ),
     );
 
@@ -32,9 +31,13 @@ class ComposerStaticInita90d1863f2e628a3b26ce04cad8b6500
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
-        'Jajo\\' => 
+        'DASPRiD\\Enum\\' => 
         array (
-            0 => __DIR__ . '/..' . '/jajo/jsondb/src',
+            0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
+        'BaconQrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
     );
 

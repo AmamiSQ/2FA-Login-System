@@ -20,7 +20,7 @@
     <?php
        require_once("vendor/autoload.php");
        use RobThree\Auth\TwoFactorAuth;
-       //include 'connect.php'; //connect to db
+       include 'connect.php'; //connect to db
        error_reporting(E_ERROR | E_PARSE); //don't print warnings to the screen
 
 
@@ -54,13 +54,13 @@
         }
        };
 
-       login();
+       //login();
 
-       /* $sql = 'SELECT * FROM test_sql';
+       $sql = 'SELECT * FROM test_sql';
        $result = mysqli_query($conn, $sql);
-       //print_r(mysqli_fetch_all($result, MYSQLI_ASSOC));
+       print_r(mysqli_fetch_all($result, MYSQLI_ASSOC));
        mysqli_free_result($result);
-       mysqli_close($conn); */
+       mysqli_close($conn);
     ?>
    <!-- end PHP code --> 
 </body>
