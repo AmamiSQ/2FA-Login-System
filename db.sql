@@ -25,3 +25,4 @@ ALTER TABLE `users`
 	ADD COLUMN token varchar(255);
 select * from `users`;
 insert into `users` values(8, 'user4', 'pass3', CURRENT_TIMESTAMP, 'test');
+SELECT token FROM users WHERE username = 'user1';

@@ -9,11 +9,14 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-require_once "connect.php";
+require_once("vendor/autoload.php");
+use PragmaRX\Google2FA\Google2FA;
+include 'connect.php'; //connect to db
  
 // Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
+$google2fa = new Google2FA();
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -55,16 +58,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
+                            $sql1 = "SELECT token FROM users WHERE username = '$username'";
+                            $sql2 = "SELECT id FROM users WHERE username = '$username'";
+                            
+                            $uid = mysqli_fetch_array(mysqli_query($link, $sql2));
+                            $dbtoken = mysqli_fetch_array(mysqli_query($link, $sql1));
+
+                            $qrcode = $google2fa->getQRCodeUrl($uid['id'], $username, $dbtoken['token']);
+                            $image_url = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl='.$qrcode;
+
                             session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
+                            $_SESSION["test"] = "hello world";
+                            $_SESSION['uid'] = $uid;
+                            $_SESSION['dbtoken'] = $dbtoken;
+                            $_SESSION['qrcode'] = $qrcode;
+                            $_SESSION['image_url'] = $image_url;
+
+                            header("location: tfa.php");
+
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
