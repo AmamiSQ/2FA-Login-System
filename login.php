@@ -66,15 +66,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                             $qrcode = $google2fa->getQRCodeUrl($uid['id'], $username, $dbtoken['token']);
                             $image_url = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl='.$qrcode;
-
+                            
+                            session_destroy();
                             session_start();
-                            $_SESSION["test"] = "hello world";
-                            $_SESSION['uid'] = $uid;
-                            $_SESSION['dbtoken'] = $dbtoken;
-                            $_SESSION['qrcode'] = $qrcode;
-                            $_SESSION['image_url'] = $image_url;
+                            $_SESSION["uid"] = $uid['id'];
+                            $_SESSION["dbtoken"] = $dbtoken['token'];
+                            $_SESSION["user"] = $username;
+                            $_SESSION["image_url"] = $image_url;
 
                             header("location: tfa.php");
+                            exit;
 
                         } else{
                             // Password is not valid, display a generic error message
