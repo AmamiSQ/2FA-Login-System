@@ -10,6 +10,18 @@ $username_err = $password_err = $confirm_password_err = "";
 
 $google2fa = new Google2FA();
 $secret = $google2fa->generateSecretKey();
+
+function tfa(){ 
+    //insert yes/no button
+    /*remove $secret and redirection header from code above
+    **some code that asks user if they want to turn on 2fa**
+        if no, move on to login page
+        if yes, setup 2fa and then move to login page
+    also figure out way not to have qr code shown on token page bc duh */
+
+    /*could also put the token question at the bottom of the register form
+    and then use that to decide whether or not to make a token */
+}
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -101,7 +113,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: login.php");
+                tfa();
+                //header("location: login.php");
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -109,6 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Close statement
             mysqli_stmt_close($stmt);
         }
+        
         
         
     }

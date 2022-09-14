@@ -21,6 +21,17 @@ $dbtoken = mysqli_fetch_array(mysqli_query($link, $sql1));
 //$image_url = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl='.$qrcode;
 
 
+//check if user already has a token
+$sql = "SELECT token FROM users WHERE username = '$user'";
+$tokencheck = mysqli_fetch_array(mysqli_query($link, $sql));
+
+if(is_null($tokencheck['token'])){
+    echo "user has no token";
+}
+else{
+    echo "user already has 2fa enabled";
+}
+exit;
 
 echo '<img src="'.$_SESSION["image_url"].'" />';
 echo '<h2>Enter Token: </h2><br>';

@@ -26,3 +26,7 @@ ALTER TABLE `users`
 select * from `users`;
 insert into `users` values(8, 'user4', 'pass3', CURRENT_TIMESTAMP, 'test');
 SELECT token FROM users WHERE username = 'user1';
+
+insert into `users` values(12, 'notoken1', 'password1', CURRENT_TIMESTAMP, null);
+insert into `users` values(13, 'notoken2', 'password2', CURRENT_TIMESTAMP, null);
+insert into `users` values(14, 'notoken3', 'password3', CURRENT_TIMESTAMP, null);

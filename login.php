@@ -58,6 +58,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
+                            //could make a boolean out of the register quetion and use that as a value here
+                            //if 2fa yes, then proceed on to the following code, if no, redirect to header
                             $sql1 = "SELECT token FROM users WHERE username = '$username'";
                             $sql2 = "SELECT id FROM users WHERE username = '$username'";
                             
