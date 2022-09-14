@@ -69,7 +69,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             session_destroy();
                             session_start();
-                            $_SESSION["uid"] = $uid['id'];
                             $_SESSION["dbtoken"] = $dbtoken['token'];
                             $_SESSION["user"] = $username;
                             $_SESSION["image_url"] = $image_url;
