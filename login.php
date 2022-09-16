@@ -58,25 +58,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
-                            //could make a boolean out of the register quetion and use that as a value here
-                            //if 2fa yes, then proceed on to the following code, if no, redirect to header
-                            $sql1 = "SELECT token FROM users WHERE username = '$username'";
-                            $sql2 = "SELECT id FROM users WHERE username = '$username'";
-                            
-                            $uid = mysqli_fetch_array(mysqli_query($link, $sql2));
-                            $dbtoken = mysqli_fetch_array(mysqli_query($link, $sql1));
+                            $sql = "SELECT token FROM users WHERE username = '$username'";
+                            $dbtoken = mysqli_fetch_array(mysqli_query($link, $sql));
+                           
+                            if(!is_null($dbtoken['token'])){
+                                session_destroy();
+                                session_start();
+                                $_SESSION["dbtoken"] = $dbtoken['token'];
+                                $_SESSION["user"] = $username;
 
-                            $qrcode = $google2fa->getQRCodeUrl($uid['id'], $username, $dbtoken['token']);
-                            $image_url = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl='.$qrcode;
+                                header("location: tfa.php");
+                                exit;
+                            }
                             
                             session_destroy();
                             session_start();
-                            $_SESSION["dbtoken"] = $dbtoken['token'];
-                            $_SESSION["user"] = $username;
-                            $_SESSION["image_url"] = $image_url;
-
-                            header("location: tfa.php");
-                            exit;
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["username"] = $username;
+                            $_SESSION["secret"] = $google2fa->generateSecretKey();
+                            
+                            // Redirect user to welcome page
+                            header("location: welcome.php");
+                            
 
                         } else{
                             // Password is not valid, display a generic error message

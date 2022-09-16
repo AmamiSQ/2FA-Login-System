@@ -7,7 +7,11 @@ use PragmaRX\Google2FA\Google2FA;
 include 'connect.php'; //connect to db
 
 $google2fa = new Google2FA();
+
+//login session start
 $user = $_SESSION["user"];
+$dbtoken = $_SESSION["dbtoken"];
+//login session end
 
 /* $username = "user1";
 $sql1 = "SELECT token FROM users WHERE username = '$username'";
@@ -21,35 +25,23 @@ $dbtoken = mysqli_fetch_array(mysqli_query($link, $sql1));
 //$image_url = 'https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl='.$qrcode;
 
 
-/*check if user already has a token
-$sql = "SELECT token FROM users WHERE username = '$user'";
-$tokencheck = mysqli_fetch_array(mysqli_query($link, $sql));
-
- if(is_null($tokencheck['token'])){
-    echo "user has no token";
-}
-else{
-    echo "user already has 2fa enabled";
-}
-exit; */
-
-echo '<img src="'.$_SESSION["image_url"].'" />';
-echo '<h2>Enter Token: </h2><br>';
-
-if(!is_null($_POST['verify'])){
-    if($google2fa->verifyKey($_SESSION["dbtoken"], $_POST['verify'])){
-        
-        session_destroy();
-        session_start();
-        // Store data in session variables
-        $_SESSION["loggedin"] = true;
-        $_SESSION["username"] = $user;                            
-        
-        // Redirect user to welcome page
-        header("location: welcome.php");
-    }
-    else{
-        echo "<br>incorrect<br>";
+if(!is_null($dbtoken)){
+    echo '<h2>Enter Token: </h2><br>';
+    if(!is_null($_POST['verify'])){
+        if($google2fa->verifyKey($dbtoken, $_POST['verify'])){
+            
+            session_destroy();
+            session_start();
+            // Store data in session variables
+            $_SESSION["loggedin"] = true;
+            $_SESSION["username"] = $user; 
+            
+            // Redirect user to welcome page
+            header("location: welcome.php");
+        }
+        else{
+            echo "<br>incorrect token, try again<br>";
+        }
     }
 }
 
